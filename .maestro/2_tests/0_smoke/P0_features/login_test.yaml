@@ -1,0 +1,21 @@
+# Login Test - P0 Priority
+# This test verifies that users can successfully log in to the application
+
+appId: com.testengtakehome.app
+---
+# Launch the app and initiate the test
+- runFlow: ../../../1_useful_functions/system_handler/initiate_test.yaml
+
+# Verify login page elements are visible
+- runFlow: ../../../0_pages/login_page/validate_UI_element.yaml
+
+# Enter valid credentials
+# Could also consolidate input email/password into one flow and make different test like valid/invalid credentials
+- runFlow: ../../../0_pages/login_page/input_email.yaml 
+- runFlow: ../../../0_pages/login_page/input_password.yaml
+- tapOn: "Login"
+
+# Verify successful login by checking for elements on the next screen
+- assertVisible: "Word Game"
+
+# Test completed successfully

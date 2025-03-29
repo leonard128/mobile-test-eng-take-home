@@ -1,0 +1,9 @@
+# Login Page
+# This file is for input email flow on login page
+
+appId: com.testengtakehome.app
+---
+
+# Enter valid credentials
+- tapOn: "Email"
+- inputText: "test@example.com"

@@ -1,0 +1,22 @@
+# This file handles the test flow to bypass the expo server for Android
+# This is the flow every test will go through
+
+appId: com.testengtakehome.app
+---
+# Launch the app
+- launchApp
+
+- runFlow:
+    when:
+      platform: android
+    commands:
+      - tapOn: "http://10.0.2.2:8081"
+      - tapOn: "Continue"
+      - tapOn: "Reload"
+
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn: "Continue"
+      - tapOn: "Reload"
