@@ -1,0 +1,8 @@
+# Validate UI element on login page:
+
+appId: com.testengtakehome.app
+---
+
+- assertVisible: "Email"
+- assertVisible: "Password"
+- assertVisible: "Login"
