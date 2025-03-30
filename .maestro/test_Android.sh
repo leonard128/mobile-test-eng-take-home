@@ -4,7 +4,7 @@
 echo "🚀 Starting build and install process..."
 
 # Navigate to project directory
-cd /Users/linhao/Github/mobile-test-eng-take-home
+cd "$(dirname "$0")/.."  # Navigate to project root using relative path
 
 # Ensure Android SDK location is set
 if [ ! -f ./android/local.properties ]; then
