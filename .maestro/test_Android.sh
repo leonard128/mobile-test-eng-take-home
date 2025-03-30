@@ -16,14 +16,16 @@ fi
 echo "📦 Installing dependencies..."
 npm install
 
-# Prepare the app for native builds
-echo "🔨 Preparing app for native build..."
-npx expo prebuild
+# Prepare the app for native builds if needed
+if [ ! -d "./android" ]; then
+  echo "🔨 Preparing app for native build..."
+  npx expo prebuild --no-install
+fi
 
-# Build the Android app
-echo "🏗️ Building Android app..."
+# Build the Android app in release mode
+echo "🏗️ Building Android app in release mode..."
 cd android
-./gradlew assembleDebug
+./gradlew assembleRelease
 cd ..
 
 # Check if any emulators are running
@@ -60,27 +62,12 @@ if adb shell pm list packages | grep -q "com.testengtakehome.app"; then
   adb uninstall com.testengtakehome.app
 fi
 
-# Start Expo server in the background
-echo "🚀 Starting Expo development server..."
-npx expo start --android &
-EXPO_PID=$!
-
-# Give Expo server time to start
-echo "⏳ Waiting for Expo server to start..."
-sleep 10
-
 # Install the app
 echo "📲 Installing app on emulator..."
-adb install -r ./android/app/build/outputs/apk/debug/app-debug.apk
+adb install -r "./android/app/build/outputs/apk/release/app-release.apk"
 
 # Run Maestro test
 echo "🧪 Running Maestro test..."
 maestro test ".maestro/2_tests/0_smoke/P0_features/login_test.yaml"
 
 echo "✅ Build, install, and test complete!"
-
-# Clean up Expo server process
-if [ ! -z "$EXPO_PID" ]; then
-  echo "🧹 Cleaning up Expo server..."
-  kill $EXPO_PID
-fi

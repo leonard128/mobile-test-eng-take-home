@@ -7,3 +7,4 @@ appId: com.testengtakehome.app
 # Enter valid credentials
 - tapOn: "Email"
 - inputText: "test@example.com"
+- runFlow: ../../1_useful_functions/iOS/dismissKeyboard.yaml

@@ -1,0 +1,11 @@
+# This file handles the keyboard dismiss on iOS only
+# There are different kind of keyboard on iOS, we could add more as needed
+
+appId: com.testengtakehome.app
+---
+
+- runFlow: #dismiss the keyboard on iOS only
+    when:
+      platform: iOS
+    commands:
+      - tapOn: return

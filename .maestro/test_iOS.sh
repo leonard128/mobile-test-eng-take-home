@@ -1,11 +1,10 @@
 #!/bin/bash
-
-# Script to build the React Native app and install it on an iOS simulator
-
-echo "🚀 Starting iOS build and install process..."
+# Script to build the React Native app and install it on an simulator
+echo "🚀 Starting build and install process..."
 
 # Navigate to project directory
-cd /Users/linhao/Github/mobile-test-eng-take-home
+cd "$(dirname "$0")/.."  # Navigate to the parent directory of the script (project root)
+echo "📍 Current directory: $(pwd)"
 
 # Install dependencies
 echo "📦 Installing dependencies..."
@@ -21,31 +20,35 @@ cd ios
 pod install
 cd ..
 
-# Clean any previous builds
-rm -rf ios/build
-
 # First, make sure the node_modules/.cache directory is clean
 rm -rf node_modules/.cache
 
-# Start the Metro bundler in a background process
-echo "🚀 Starting Metro bundler..."
-npx expo start --dev-client &
-METRO_PID=$!
+# Check if any simulator are running
+echo "🔍 Checking for running simulators..."
+RUNNING_SIMULATOR=$(xcrun simctl list devices | grep -i "booted" | head -1 | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/')
+if [ -z "$RUNNING_SIMULATOR" ]; then
+  echo "📱 No simulator running. Starting iPhone 16 simulator..."
+  xcrun simctl boot "iPhone 16 Plus" || xcrun simctl boot "$(xcrun simctl list devices available | grep -i 'iphone 16 Plus' | head -1 | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/')"
+  sleep 15
+else
+  echo "📱 Found running simulator: $RUNNING_SIMULATOR"
+fi
 
-# Wait for Metro to start up
-sleep 10
+# Check if app is already installed and uninstall it
+echo "🔍 Checking if app is already installed..."
+SIMULATOR_ID=${RUNNING_SIMULATOR:-$(xcrun simctl list devices | grep -i "booted" | head -1 | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/')}
+if xcrun simctl listapps "$SIMULATOR_ID" | grep -q "com.testengtakehome.app"; then
+  echo "🗑️ Uninstalling existing app..."
+  xcrun simctl uninstall "$SIMULATOR_ID" "com.testengtakehome.app"
+fi
 
-# Build and run the app with Expo
-echo "📱 Building and running with Expo..."
-npx expo run:ios 
+# Build and run the app on the simulator
+# Build and install the app on the simulator without launching it
+echo "📱 Building and installing app on simulator (without launching)..."
+npx expo run:ios --configuration Release --no-bundler
 
 # Run Maestro test
 echo "🧪 Running Maestro test..."
-maestro test ".maestro/2_tests/0_smoke/P0_features/login_test.yaml"
+maestro test .maestro/2_tests/0_smoke/P0_features/login_test.yaml
 
-# Clean up Expo server process
-if [ ! -z "$EXPO_PID" ]; then
-  echo "🧹 Cleaning up Expo server..."
-  kill $EXPO_PID
-fi
-# Fin
+echo "✅ Build, install, and test complete!"

@@ -4,7 +4,10 @@
 appId: com.testengtakehome.app
 ---
 # Launch the app and initiate the test
-- runFlow: ../../../1_useful_functions/system_handler/initiate_test.yaml
+# Since we're building a prod version of the app, we don't need to initiate the test
+#- runFlow: ../../../1_useful_functions/system_handler/initiate_test.yaml
+
+- launchApp
 
 # Verify login page elements are visible
 - runFlow: ../../../0_pages/login_page/validate_UI_element.yaml
@@ -13,6 +16,9 @@ appId: com.testengtakehome.app
 # Could also consolidate input email/password into one flow and make different test like valid/invalid credentials
 - runFlow: ../../../0_pages/login_page/input_email.yaml 
 - runFlow: ../../../0_pages/login_page/input_password.yaml
+- runFlow: ../../../1_useful_functions/iOS/dismissKeyboard.yaml
+
+# Using of tapOn for login button here is not ideal just to show how it looks in the log comparing to the structure of POM
 - tapOn: "Login"
 
 # Verify successful login by checking for elements on the next screen
