@@ -47,5 +47,4 @@ Gonna try to make it work with CI.
 * Did some more research on this expo thing, seems we could biuld with configuration prod to avoid the fakakta 'server' thing. Need to modify the bash script to make it straight forward.
 * Scripts are working good. 'build_android.sh' and 'build_ios.sh' will take the build work and 'test_android.sh' and 'test_ios.sh' will take the test work. Next step is to get CI working.
     * The plan is to first make the test run on maestro cloud. Then we can move to CI.
-=======
->>>>>>> 97a49d35a5eb874a1fd645795c93930e595bc960
+
