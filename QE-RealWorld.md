@@ -41,6 +41,3 @@ But good news is that iOS is running smoothly with local server.
 
 ## 10. Challenge
 Gonna try to make it work with CI.
-
-## 11. Note on the weekend
-###Did some more research on this expo thing, seems we could biuld with configuration prod to avoid the fakakta 'server' thing. Need to modify the bash script to make it straight forward.
