@@ -18,10 +18,10 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-      - uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: .maestro/test_Android.sh
+      # - uses: reactivecircus/android-emulator-runner@v2
+      #   with:
+      #     api-level: 29
+      #     script: .maestro/test_Android.sh
       - uses: mobile-dev-inc/action-maestro-cloud@v1
         with:
           api-key: ${{ secrets.MOBILE_TEST_ENG_TAKE_HOME }}
