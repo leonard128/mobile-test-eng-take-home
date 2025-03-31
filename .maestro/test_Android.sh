@@ -28,39 +28,39 @@ cd android
 ./gradlew assembleRelease
 cd ..
 
-# Check if any emulators are running
-RUNNING_EMULATOR=$(adb devices | grep emulator | cut -f1)
+# # Check if any emulators are running
+# RUNNING_EMULATOR=$(adb devices | grep emulator | cut -f1)
 
-if [ -z "$RUNNING_EMULATOR" ]; then
-  echo "🔍 No emulator running. Attempting to start one..."
+# if [ -z "$RUNNING_EMULATOR" ]; then
+#   echo "🔍 No emulator running. Attempting to start one..."
   
-  # List available emulators
-  EMULATORS=$($HOME/Library/Android/sdk/emulator/emulator -list-avds)
+#   # List available emulators
+#   EMULATORS=$($HOME/Library/Android/sdk/emulator/emulator -list-avds)
   
-  if [ -z "$EMULATORS" ]; then
-    echo "❌ No emulators found. Please create one in Android Studio first."
-    exit 1
-  fi
+#   if [ -z "$EMULATORS" ]; then
+#     echo "❌ No emulators found. Please create one in Android Studio first."
+#     exit 1
+#   fi
   
-  # Get the first emulator from the list
-  FIRST_EMULATOR=$(echo "$EMULATORS" | head -n1)
-  echo "🚀 Starting emulator: $FIRST_EMULATOR"
+#   # Get the first emulator from the list
+#   FIRST_EMULATOR=$(echo "$EMULATORS" | head -n1)
+#   echo "🚀 Starting emulator: $FIRST_EMULATOR"
   
-  # Start the emulator in the background
-  $HOME/Library/Android/sdk/emulator/emulator -avd "$FIRST_EMULATOR" &
+#   # Start the emulator in the background
+#   $HOME/Library/Android/sdk/emulator/emulator -avd "$FIRST_EMULATOR" &
   
-  # Wait for emulator to boot
-  echo "⏳ Waiting for emulator to boot..."
-  adb wait-for-device
-  sleep 90  # Give it a bit more time to fully boot
-fi
+#   # Wait for emulator to boot
+#   echo "⏳ Waiting for emulator to boot..."
+#   adb wait-for-device
+#   sleep 90  # Give it a bit more time to fully boot
+# fi
 
-# Check if app is already installed and uninstall it
-echo "🔍 Checking if app is already installed..."
-if adb shell pm list packages | grep -q "com.testengtakehome.app"; then
-  echo "🗑️ Uninstalling existing app..."
-  adb uninstall com.testengtakehome.app
-fi
+# # Check if app is already installed and uninstall it
+# echo "🔍 Checking if app is already installed..."
+# if adb shell pm list packages | grep -q "com.testengtakehome.app"; then
+#   echo "🗑️ Uninstalling existing app..."
+#   adb uninstall com.testengtakehome.app
+# fi
 
 # Install the app
 echo "📲 Installing app on emulator..."
