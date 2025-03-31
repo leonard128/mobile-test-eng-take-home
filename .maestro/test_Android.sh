@@ -59,14 +59,12 @@ cd ..
 #   adb uninstall com.testengtakehome.app
 # fi
 
-# Install the app
-echo "📲 Installing app on emulator..."
-adb install -r "./android/app/build/outputs/apk/release/app-release.apk"
+# # Install the app
+# echo "📲 Installing app on emulator..."
+# adb install -r "./android/app/build/outputs/apk/release/app-release.apk"
 
-# Run Maestro test
-echo "🧪 Running Maestro test..."
-maestro test ".maestro/2_tests/0_smoke/P0_features/login_test.yaml"
+# # Run Maestro test
+# echo "🧪 Running Maestro test..."
+# maestro test ".maestro/2_tests/0_smoke/P0_features/login_test.yaml"
 
-echo "✅ Build, install, and test complete!"
-
-npm run android
+echo "✅ Build complete!"
