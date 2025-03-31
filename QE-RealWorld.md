@@ -49,3 +49,4 @@ Gonna try to make it work with CI.
     * After reading the document of GitHub Actions, I found it's very easy to setup. Just need to create a workflow file in '.github/workflows' folder.
     * The workflow file is written in YAML. It will be triggered when there's a push to the main branch(or a PR towards it).
     * The workflow file will run the bash script for testing.
+    * The error was 404 not found. Digged a bit more and successfully corrected 3 errors so now it's 401.
