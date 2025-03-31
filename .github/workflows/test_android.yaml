@@ -13,9 +13,7 @@ jobs:
     outputs:
       app: android/app/build/outputs/apk/release
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.9.6
         with:
-          java-version: 17
-          distribution: 'temurin'
+          api-key: ${{ secrets.MOBILE_TEST_ENG_TAKE_HOME }}
       - run: .maestro/test_Android.sh
