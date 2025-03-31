@@ -9,7 +9,7 @@ on:
 
 jobs:
   maestro-cloud:
-    runs-on: macos-latest
+    runs-on: macos-14
     outputs:
       app: android/app/build/outputs/apk/release
     steps:
