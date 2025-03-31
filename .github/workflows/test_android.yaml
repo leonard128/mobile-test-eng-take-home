@@ -15,11 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
-      - uses: reactivecircus/android-emulator-runner@v2
         with:
           java-version: 17
           distribution: 'temurin'
       - run: .maestro/test_Android.sh
+        uses: reactivecircus/android-emulator-runner@v2
       - uses: mobile-dev-inc/action-maestro-cloud@v1
         with:
           api-key: ${{ secrets.MOBILE_TEST_ENG_TAKE_HOME }}
