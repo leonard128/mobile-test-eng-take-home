@@ -3,14 +3,9 @@
 
 echo "🚀 Starting build and install process..."
 
-# Navigate to project directory
+# Navigate to project directory - make sure we're in the correct directory
 cd "$(dirname "$0")/.."  # Navigate to project root using relative path
-
-# Ensure Android SDK location is set
-if [ ! -f ./android/local.properties ]; then
-  echo "Creating local.properties file..."
-  echo "sdk.dir=$HOME/Library/Android/sdk" > ./android/local.properties
-fi
+echo "📍 Current directory: $(pwd)"
 
 # Install dependencies
 echo "📦 Installing dependencies..."
@@ -19,7 +14,9 @@ npm install
 # Prepare the app for native builds if needed
 if [ ! -d "./android" ]; then
   echo "🔨 Preparing app for native build..."
-  npx expo prebuild --no-install
+  npx expo prebuild --platform android
+else
+  echo "📱 Android project already exists"
 fi
 
 # Build the Android app in release mode

@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-      - run: android/gradlew assembleDebug
+      - run: .maestro/test_android.sh
       - uses: mobile-dev-inc/action-maestro-cloud@v1
         with:
           api-key: ${{ secrets.MOBILE_TEST_ENG_TAKE_HOME }}
