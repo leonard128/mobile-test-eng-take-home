@@ -41,10 +41,11 @@ But good news is that iOS is running smoothly with local server.
 
 ## 10. Challenge
 Gonna try to make it work with CI.
-<<<<<<< HEAD
 
 ## 11. Note on the weekend
 * Did some more research on this expo thing, seems we could biuld with configuration prod to avoid the fakakta 'server' thing. Need to modify the bash script to make it straight forward.
 * Scripts are working good. 'build_android.sh' and 'build_ios.sh' will take the build work and 'test_android.sh' and 'test_ios.sh' will take the test work. Next step is to get CI working.
     * The plan is to first make the test run on maestro cloud. Then we can move to CI.
-
+    * After reading the document of GitHub Actions, I found it's very easy to setup. Just need to create a workflow file in '.github/workflows' folder.
+    * The workflow file is written in YAML. It will be triggered when there's a push to the main branch(or a PR towards it).
+    * The workflow file will run the bash script for testing.
