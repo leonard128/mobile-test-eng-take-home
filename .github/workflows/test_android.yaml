@@ -22,5 +22,4 @@ jobs:
       - uses: mobile-dev-inc/action-maestro-cloud@v1.9.6
         with:
           api-key: ${{ secrets.MOBILE_TEST_ENG_TAKE_HOME }}
-          project-id: 16049
           app-file: android/app/build/outputs/apk/release/app-release.apk
